@@ -111,15 +111,16 @@ function tube(a,b,r,mat){
 const wheelZ=1.15, wheelR=.62;
 function wheel(z){
   const g=new THREE.Group();
-  const t=new THREE.Mesh(new THREE.TorusGeometry(wheelR,.07,10,28),dark); g.add(t);
+  const spin=new THREE.Group(); g.add(spin);
+  const t=new THREE.Mesh(new THREE.TorusGeometry(wheelR,.07,10,28),dark); spin.add(t);
   for(let i=0;i<8;i++){
     const s=new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,wheelR*2,6),M(0x9aa2ab));
-    s.rotation.z=i*Math.PI/8; g.add(s);
+    s.rotation.z=i*Math.PI/8; spin.add(s);
   }
   const hub=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,.16,8),M(0x9aa2ab));
-  hub.rotation.x=Math.PI/2; g.add(hub);
+  hub.rotation.x=Math.PI/2; spin.add(hub);
   g.rotation.y=Math.PI/2; g.position.set(0,wheelR,z);
-  g.userData.spin=t; return g;
+  g.userData.spin=spin; return g;
 }
 const wF=wheel(wheelZ), wB=wheel(-wheelZ); rig.add(wF,wB);
 
@@ -194,7 +195,7 @@ function tick(){
   requestAnimationFrame(tick);
   const dt=clock.getDelta(); t+=dt;
 
-  wF.children[0].rotation.x+=dt*5; wB.children[0].rotation.x+=dt*5;
+  wF.userData.spin.rotation.z+=dt*5; wB.userData.spin.rotation.z+=dt*5;
   crank.rotation.x=t*3.4;
 
   // pedal world positions
