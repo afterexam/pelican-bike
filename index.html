@@ -96,34 +96,6 @@ svg{max-width:96vw;height:auto}
 <path id="fFoot" d="M-10 0 L16 2 L10 9 L-8 8 Z" fill="#e07f39" transform="translate(396.4,376.5)"/>
 <path id="nFoot" d="M-10 0 L16 2 L10 9 L-8 8 Z" fill="#f6b93b" transform="translate(433.6,423.5)"/>
 </svg>
-<script>
-const C={x:415,y:400}, R=30, H={x:360,y:280}, L1=85, L2=85;
-const g=id=>document.getElementById(id);
-function setLeg(th,sh,ft,arm,ang){
-  const px=C.x+R*Math.cos(ang), py=C.y+R*Math.sin(ang);
-  let dx=px-H.x, dy=py-H.y, d=Math.hypot(dx,dy);
-  d=Math.min(Math.max(d,1), L1+L2-0.5);
-  const ux=dx/d, uy=dy/d;
-  const a=(L1*L1-L2*L2+d*d)/(2*d);
-  const h=Math.sqrt(Math.max(L1*L1-a*a,0));
-  const kx=H.x+a*ux+h*uy, ky=H.y+a*uy-h*ux;
-  const ex=H.x+ux*d, ey=H.y+uy*d;
-  th.setAttribute('x1',H.x); th.setAttribute('y1',H.y);
-  th.setAttribute('x2',kx); th.setAttribute('y2',ky);
-  sh.setAttribute('x1',kx); sh.setAttribute('y1',ky);
-  sh.setAttribute('x2',ex); sh.setAttribute('y2',ey);
-  ft.setAttribute('transform','translate('+ex+','+ey+')');
-  arm.setAttribute('x2',px); arm.setAttribute('y2',py);
-}
-let t0=null;
-function loop(ts){
-  if(t0===null)t0=ts;
-  const t=(ts-t0)/1000, w=3.5;
-  setLeg(g('nThigh'),g('nShin'),g('nFoot'),g('armA'), w*t);
-  setLeg(g('fThigh'),g('fShin'),g('fFoot'),g('armB'), w*t+Math.PI);
-  requestAnimationFrame(loop);
-}
-requestAnimationFrame(loop);
-</script>
+
 </body>
 </html>
