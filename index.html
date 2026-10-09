@@ -128,10 +128,10 @@ const BB=new THREE.Vector3(0,wheelR,0), BF=new THREE.Vector3(0,wheelR,wheelZ), B
 const bb=new THREE.Vector3(0,1.15,0);                       // bottom bracket
 const seat=new THREE.Vector3(-.28,1.62,-.42);               // saddle
 const hb=new THREE.Vector3(.32,1.72,.62);                   // handlebar
-rig.add(tube(bb,BBk,.045,red), tube(bb,seat,.045,red), tube(BBk,seat,.04,red));
-rig.add(tube(bb,hb,.045,red), tube(new THREE.Vector3(0,1.15,.62),hb,.04,red));
-rig.add(tube(new THREE.Vector3(0,1.15,-.62),seat,.04,red));
-const saddle=new THREE.Mesh(new THREE.BoxGeometry(.34,.07,.16),dark); saddle.position.copy(seat); rig.add(saddle);
+rig.add(tube(bb,BBk,.055,red), tube(bb,seat,.055,red), tube(BBk,seat,.05,red));
+rig.add(tube(bb,hb,.055,red), tube(new THREE.Vector3(0,1.45,.6),new THREE.Vector3(0,wheelR,wheelZ),.05,red));
+rig.add(tube(new THREE.Vector3(0,1.15,-.62),seat,.05,red));
+const saddle=new THREE.Mesh(new THREE.BoxGeometry(.44,.08,.2),dark); saddle.position.copy(seat); saddle.position.y-=.02; rig.add(saddle);
 const bar=new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,.5,8),dark);
 bar.rotation.z=Math.PI/2; bar.position.set(0,hb.y+.06,.62); rig.add(bar);
 
@@ -145,26 +145,26 @@ const p2=p1.clone(); p2.position.set(0,-.25,-.1); crank.add(p2);
 
 // pelican
 const pel=new THREE.Group(); rig.add(pel);
-const hip=new THREE.Vector3(-.22,1.78,-.40);   // on saddle
-const bodyC=new THREE.Vector3(-.35,2.35,-.25);
+const hip=new THREE.Vector3(-.26,1.64,-.38);   // on saddle
+const bodyC=new THREE.Vector3(-.34,2.0,-.22);
 const body=new THREE.Mesh(new THREE.SphereGeometry(.55,20,16),M(0xf7f7f2));
 body.scale.set(1,.92,1.25); body.position.copy(bodyC); pel.add(body);
 const tail=new THREE.Mesh(new THREE.ConeGeometry(.22,.6,10),M(0xf7f7f2));
-tail.position.set(-.85,2.42,-.3); tail.rotation.z=Math.PI/2+.35; pel.add(tail);
+tail.position.set(-.8,2.05,-.28); tail.rotation.z=Math.PI/2+.35; pel.add(tail);
 const neck=new THREE.Mesh(new THREE.CylinderGeometry(.13,.17,.75,12),M(0xf7f7f2));
-neck.position.set(-.05,3.0,-.05); neck.rotation.z=-.15; pel.add(neck);
+neck.position.set(-.02,2.62,-.04); neck.rotation.z=-.15; pel.add(neck);
 const head=new THREE.Mesh(new THREE.SphereGeometry(.24,16,12),M(0xf7f7f2));
-head.position.set(.02,3.42,-.02); pel.add(head);
+head.position.set(.04,3.02,-.02); pel.add(head);
 const beak=new THREE.Mesh(new THREE.ConeGeometry(.09,.55,10),M(0xf59e2d));
-beak.position.set(.42,3.4,.02); beak.rotation.z=-Math.PI/2; pel.add(beak);
+beak.position.set(.44,3.0,.02); beak.rotation.z=-Math.PI/2; pel.add(beak);
 for(const s of [-1,1]){
   const eye=new THREE.Mesh(new THREE.SphereGeometry(.035,8,8),M(0x1a1a1a));
-  eye.position.set(.12,3.47,s*.17); pel.add(eye);
+  eye.position.set(.14,3.07,s*.17); pel.add(eye);
 }
 const wings=[];
 for(const s of [-1,1]){
   const w=new THREE.Mesh(new THREE.SphereGeometry(.34,14,10),M(0xefefe8));
-  w.scale.set(1.15,.5,.75); w.position.set(-.35,2.4,s*.55);
+  w.scale.set(1.15,.5,.75); w.position.set(-.36,2.05,s*.55);
   pel.add(w); wings.push(w);
 }
 // legs
