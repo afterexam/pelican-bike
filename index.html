@@ -3,21 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>鹈鹕骑自行车</title>
-<style>
-html,body{margin:0;padding:0;background:#dfeef7;display:flex;align-items:center;justify-content:center;min-height:100vh}
-svg{max-width:96vw;height:auto}
-@keyframes rot{to{transform:rotate(360deg)}}
-.spin{animation:rot .8s linear infinite;transform-box:fill-box;transform-origin:center}
-@keyframes bob{from{transform:translateY(0)}to{transform:translateY(4px)}}
-.bob{animation:bob .5s ease-in-out infinite alternate}
-@keyframes flap{from{transform:rotate(-3deg)}to{transform:rotate(4deg)}}
-.wing{animation:flap 1s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:left center}
-@keyframes dash{to{stroke-dashoffset:-80}}
-.dash{animation:dash .14s linear infinite}
-@keyframes drift{to{transform:translateX(-900px)}}
-.clouds{animation:drift 35s linear infinite}
-.hills{animation:drift 11s linear infinite}
-</style>
+
 </head>
 <body>
 <svg id="scene" viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg">
