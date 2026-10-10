@@ -38,7 +38,7 @@ scene.background=new THREE.Color(0xaee2ff);
 scene.fog=new THREE.Fog(0xaee2ff,60,160);
 
 const camera=new THREE.PerspectiveCamera(45,W()/H(),.1,300);
-camera.position.set(8.5,3.6,10.5);
+camera.position.set(5.5,3.2,9.5);
 
 const controls=new OrbitControls(camera,renderer.domElement);
 controls.target.set(0,1.9,0);
@@ -98,7 +98,7 @@ const sun=new THREE.Mesh(new THREE.SphereGeometry(3,24,18),new THREE.MeshBasicMa
 sun.position.set(-28,24,-40); scene.add(sun);
 
 // bike: faces +x (road dashes scroll toward -x, so it rides forward)
-const rig=new THREE.Group(); rig.rotation.y=Math.PI/2; scene.add(rig);
+const rig=new THREE.Group(); scene.add(rig);
 const red=M(0xd23b2e), dark=M(0x22262b);
 
 function tube(a,b,r,mat){
