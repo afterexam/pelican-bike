@@ -149,22 +149,23 @@ const white=M(0xf7f7f2), cream=M(0xefefe8);
 const orange=M(0xf59e2d), pouchM=M(0xf5b94a);
 
 const body=new THREE.Mesh(new THREE.SphereGeometry(.55,20,16),white);
-body.scale.set(1.18,.8,.95); body.position.set(-.42,2.02,0);
+body.scale.set(1.18,.8,.95); body.position.set(-.42,1.97,0);
 body.rotation.z=-.35; pel.add(body);
 
 const tail=new THREE.Mesh(new THREE.ConeGeometry(.18,.55,10),cream);
 tail.position.set(-1.05,2.2,0); tail.rotation.z=Math.PI/2+.5; pel.add(tail);
 
-// neck: spheres along an S curve
-const neckPts=[];
-for(let i=0;i<=6;i++){
-  const tt=i/6;
-  const cx=-.22+.5*tt, cy=2.28+.62*tt+Math.sin(tt*Math.PI)*.03;
-  const rr=.14-.035*tt;
-  const s=new THREE.Mesh(new THREE.SphereGeometry(rr,12,10),white);
-  s.position.set(cx,cy,0); pel.add(s);
-  neckPts.push(new THREE.Vector3(cx,cy,0));
-}
+// neck: smooth tube along an S curve
+const neckCurve=new THREE.CatmullRomCurve3([
+  new THREE.Vector3(-.3,2.25,0),
+  new THREE.Vector3(-.14,2.55,0),
+  new THREE.Vector3(.0,2.76,0),
+  new THREE.Vector3(.18,2.9,0),
+  new THREE.Vector3(.3,2.97,0)
+]);
+pel.add(new THREE.Mesh(new THREE.TubeGeometry(neckCurve,24,.115,12),white));
+const neckBase=new THREE.Mesh(new THREE.SphereGeometry(.17,12,10),white);
+neckBase.position.set(-.3,2.25,0); pel.add(neckBase);
 
 const head=new THREE.Mesh(new THREE.SphereGeometry(.23,16,12),white);
 head.position.set(.32,2.98,0); pel.add(head);
